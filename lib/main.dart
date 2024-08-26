@@ -10,14 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Scaffold(
-        body: Text(
-          'Yeezy.com 시작'
+      home: Scaffold(
+        body: Center(
+          child: Image.asset('assets/images/VULTURES2-08032024ZV2.webp'),
         ),
       )
     );
