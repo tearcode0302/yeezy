@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:yeezy/src/common/components/app_font.dart';
 
 class InitStartPage extends StatelessWidget {
   const InitStartPage({super.key});
@@ -19,24 +20,24 @@ class InitStartPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 40),
-            Text(
-              '칸예웨스트 굿즈 공식 샵',
-              style: GoogleFonts.notoSans(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white,
-              ),
+            const AppFont(
+              '칸예웨스트 공식 굿즈 샵',
+              fontWeight: FontWeight.bold,
+              size: 20,
             ),
             const SizedBox(height: 15),
-            Text(
+            AppFont(
               '전국 3일내 배송, \n 지금 내 동네를 선택하고 시작해보세요',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.notoSans(
-                fontSize: 18,
-                color: Colors.white.withOpacity(0.6),
-              ),
-            )
+              align: TextAlign.center,
+              size: 18,
+              color: Colors.white.withOpacity(0.6),
+            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          left: 25, right: 25, bottom: 25 + Get.mediaQuery.padding.bottom,
         ),
       ),
     );
