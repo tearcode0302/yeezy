@@ -39,6 +39,12 @@ class InitStartPage extends StatelessWidget {
         padding: EdgeInsets.only(
           left: 25, right: 25, bottom: 25 + Get.mediaQuery.padding.bottom,
         ),
+        child: const AppFont(
+          '시작하기',
+          align: TextAlign.center,
+          size: 18,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
