@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yeezy/src/common/components/getx_listener.dart';
+import 'package:yeezy/src/common/controller/authentication_controller.dart';
+import 'package:yeezy/src/common/controller/data_load_controller.dart';
 import 'package:yeezy/src/splash/controller/splash_controller.dart';
+
+import '../../common/components/app_font.dart';
+import '../enum/step_type.dart';
 
 class SplashPage extends GetView<SplashController> {
   const SplashPage({super.key});
@@ -9,13 +15,104 @@ class SplashPage extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Obx(
-            () => Text(
-              '${controller.loadStep.value.name}중 입니다.',
-              style: const TextStyle(color: Colors.white),
-            )
+          child: GetxListener<bool>(
+        listen: (bool isLogined) {
+          if (isLogined) {
+            Get.offNamed('/home');
+          } else {
+            Get.offNamed('/login');
+          }
+        },
+        stream: Get.find<AuthenticationController>().isLogined,
+        child: GetxListener<bool>(
+          listen: (bool value) {
+            if (value) {
+              controller.loadStep(StepType.authcheck);
+            }
+          },
+          stream: Get.find<DataLoadController>().isDataLoad,
+          child: GetxListener<StepType>(
+            initCall: () {
+              controller.loadStep(StepType.dataLoad);
+            },
+            listen: (StepType? value) {
+              if (value == null) return;
+              switch (value) {
+                case StepType.init:
+                case StepType.dataLoad:
+                  Get.find<DataLoadController>().loadData();
+                  break;
+                case StepType.authcheck:
+                  Get.find<AuthenticationController>().authCheck();
+                  break;
+              }
+            },
+            stream: controller.loadStep,
+            child: const _SplashView()
+          ),
+        ),
+      )),
+    );
+  }
+}
+
+class _SplashView extends GetView<SplashController> {
+  const _SplashView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 200,
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 99,
+                height: 116,
+                child: Image.asset(
+                  'assets/images/VULTURES2-08032024ZV2.webp',
+                ),
+              ),
+              const SizedBox(height: 40,),
+              const AppFont(
+                'Yeezy.com 과 함께 Yeezy 의류를 구매',
+                fontWeight: FontWeight.bold,
+                size: 20,
+              ),
+              const SizedBox(height: 15,),
+              AppFont(
+                'Yeezy 머천다이즈를 만나보세요 \n지금 내 동네를 선택하고 시작해보세요!',
+                align: TextAlign.center,
+                size: 18,
+                color: Colors.white.withOpacity(0.6),
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 200,
+          child: Column(
+            children: [
+              Obx(
+                  () {
+                    return Text(
+                      '${controller.loadStep.value.name}중 입니다.',
+                      style: const TextStyle(color: Colors.white),
+                    );
+                  },
+              ),
+              const SizedBox(height: 20,),
+              const CircularProgressIndicator(strokeWidth: 1, color: Colors.white,)
+            ],
+          ),
         )
-      ),
+      ],
     );
   }
 }

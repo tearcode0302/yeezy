@@ -2,7 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yeezy/src/common/controller/authentication_controller.dart';
+import 'package:yeezy/src/common/controller/data_load_controller.dart';
+import 'package:yeezy/src/home/page/home_page.dart';
 import 'package:yeezy/src/splash/controller/splash_controller.dart';
+import 'package:yeezy/src/user/login/page/login_page.dart';
 
 import 'firebase_options.dart';
 import 'src/app.dart';
@@ -37,9 +41,13 @@ class MyApp extends StatelessWidget {
       ),
       initialBinding: BindingsBuilder(() {
         Get.put(SplashController());
+        Get.put(DataLoadController());
+        Get.put(AuthenticationController());
       }),
       getPages: [
         GetPage(name: '/', page: () => const App()),
+        GetPage(name: '/home', page: () => const HomePage()),
+        GetPage(name: '/login', page: () => const LoginPage()),
       ],
     );
   }

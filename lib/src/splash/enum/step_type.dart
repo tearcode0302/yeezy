@@ -1,4 +1,5 @@
 enum StepType {
+  init(''),
   dataLoad('데이터 로드'),
   authcheck('인증 체크');
 
