@@ -7,6 +7,7 @@ import 'package:yeezy/src/common/controller/authentication_controller.dart';
 import 'package:yeezy/src/common/controller/data_load_controller.dart';
 import 'package:yeezy/src/home/page/home_page.dart';
 import 'package:yeezy/src/splash/controller/splash_controller.dart';
+import 'package:yeezy/src/user/controller/login_controller.dart';
 import 'package:yeezy/src/user/login/page/login_page.dart';
 import 'package:yeezy/src/user/repository/authentication_repository.dart';
 
@@ -51,7 +52,11 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => const App()),
         GetPage(name: '/home', page: () => const HomePage()),
-        GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/login', page: () => const LoginPage(), binding: BindingsBuilder(() {
+          Get.lazyPut<LoginController>(
+              () => LoginController(Get.find<AuthenticationRepository>())
+          );
+        })),
       ],
     );
   }

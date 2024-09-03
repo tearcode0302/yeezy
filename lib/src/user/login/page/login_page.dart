@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:yeezy/src/user/controller/login_controller.dart';
 
 import '../../../common/components/app_font.dart';
 import '../../../common/components/btn.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   Widget _logoView() {
@@ -66,7 +68,7 @@ class LoginPage extends StatelessWidget {
         children: [
           Btn(
             color: Colors.white,
-            onTap: () {},
+            onTap: controller.googleLogin,
             child: Row(
               children: [
                 Image.asset('assets/images/google.png'),
@@ -82,10 +84,10 @@ class LoginPage extends StatelessWidget {
           Btn(
             color: Colors.black,
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            onTap: () {},
+            onTap: controller.appleLogin,
             child: Row(
               children: [
-                Image.asset('assets/images/VULTURES2-08032024ZV2.webp'),
+                Image.asset('assets/images/apple.png'),
                 const SizedBox(width: 17,),
                 const AppFont(
                   'Apple로 계속하기',

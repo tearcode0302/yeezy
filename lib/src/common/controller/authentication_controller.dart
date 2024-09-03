@@ -21,7 +21,7 @@ class AuthenticationController extends GetxController {
     if (user == null) {
       status(AuthenticationStatus.unknown);
     } else {
-
+      status(AuthenticationStatus.authentication);
     }
   }
 
