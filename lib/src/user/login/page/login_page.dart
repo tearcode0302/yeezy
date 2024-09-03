@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/components/app_font.dart';
+import '../../../common/components/btn.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -58,6 +59,45 @@ class LoginPage extends StatelessWidget {
     );
   }
 
+  Widget _snsLoginBtn() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80),
+      child: Column(
+        children: [
+          Btn(
+            color: Colors.white,
+            onTap: () {},
+            child: Row(
+              children: [
+                Image.asset('assets/images/google.png'),
+                const SizedBox(width: 30,),
+                const AppFont(
+                  'Google로 계속하기',
+                  color: Colors.black,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 15,),
+          Btn(
+            color: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            onTap: () {},
+            child: Row(
+              children: [
+                Image.asset('assets/images/VULTURES2-08032024ZV2.webp'),
+                const SizedBox(width: 17,),
+                const AppFont(
+                  'Apple로 계속하기',
+                  color: Colors.white,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
 
   @override
@@ -69,6 +109,7 @@ class LoginPage extends StatelessWidget {
         children: [
           _logoView(),
           _textDivider(),
+          _snsLoginBtn(),
         ],
       ),
     );
