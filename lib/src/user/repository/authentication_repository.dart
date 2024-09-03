@@ -3,12 +3,13 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../model/user_model.dart';
 
-class AuthenticationRepository {
+class AuthenticationRepository extends GetxService {
   final FirebaseAuth _firebaseAuth;
 
   AuthenticationRepository(this._firebaseAuth);
