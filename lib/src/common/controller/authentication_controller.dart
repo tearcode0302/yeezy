@@ -19,6 +19,10 @@ class AuthenticationController extends GetxController {
     });
   }
 
+  void reload() {
+    _userStateChangedEvent(userModel.value);
+  }
+
   void _userStateChangedEvent(UserModel? user) async {
     if (user == null) {
       status(AuthenticationStatus.unknown);

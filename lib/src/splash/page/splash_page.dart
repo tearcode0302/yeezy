@@ -17,13 +17,15 @@ class SplashPage extends GetView<SplashController> {
     return Scaffold(
       body: Center(
           child: GetxListener<AuthenticationStatus>(
-        listen: (AuthenticationStatus status) {
+        listen: (AuthenticationStatus status) async {
           switch (status) {
             case AuthenticationStatus.authentication:
               Get.offNamed('/home');
+              break;
             case AuthenticationStatus.unAuthenticated:
               var userModel = Get.find<AuthenticationController>().userModel.value;
-              Get.offNamed('/signup/${userModel.uid}');
+              await Get.offNamed('/signup/${userModel.uid}');
+              Get.find<AuthenticationController>().reload();
               break;
             case AuthenticationStatus.unknown:
               Get.offNamed('/login');
